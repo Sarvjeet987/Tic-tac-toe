@@ -1,2 +1,3 @@
-# t3game
-Tik-Tak-Toe Game
+
+Tik-Tak-Toe Game ( Java Script - 1 )
+Technology Java Script
