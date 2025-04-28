@@ -1,10 +1,11 @@
 let boxs = document.querySelectorAll(".box");
-let resetbtn = document.querySelector("#reset-btn"); // fixed typo
+let resetbtn = document.querySelector("#reset-btn");
 let newGameBtn = document.querySelector("#new-btn");
 let msgContainer = document.querySelector(".msg-container");
 let msg = document.querySelector("#msg");
 
 let turn0 = true; // Player O starts
+let gameActive = true; // control clicking after game ends
 
 const winpattern = [
     [0, 1, 2],
@@ -19,12 +20,15 @@ const winpattern = [
 
 const resetGame = () => {
     turn0 = true;
+    gameActive = true;
     enableboxs();
     msgContainer.classList.add("hide");
 };
 
 boxs.forEach((box) => {
     box.addEventListener("click", () => {
+        if (!gameActive) return; // stop clicks if game over
+
         if (turn0) {
             box.innerText = "O";
             turn0 = false;
@@ -51,8 +55,9 @@ const enableboxs = () => {
 };
 
 const showWinner = (winner) => {
-    msg.innerText = `Congratulations, Winner is ${winner}`;
+    msg.innerText = `🎉 Congratulations! Player "${winner}" wins! 🎉`;
     msgContainer.classList.remove("hide");
+    gameActive = false;
     disableboxs();
 };
 
@@ -68,6 +73,14 @@ const checkWinner = () => {
                 return;
             }
         }
+    }
+
+    // Check for draw if no winner
+    let isDraw = [...boxs].every(box => box.innerText !== "");
+    if (isDraw) {
+        msg.innerText = "😐 It's a Draw!";
+        msgContainer.classList.remove("hide");
+        gameActive = false;
     }
 };
 
