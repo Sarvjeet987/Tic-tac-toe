@@ -70,10 +70,10 @@ function checkResult() {
     }
 
     if (roundWon) {
-        statusText.textContent = `Player ${currentPlayer} wins!`;
+        statusText.textContent = `Player ${currentPlayer} wins! 🎉`;
         isGameActive = false;
     } else if (!board.includes("")) {
-        statusText.textContent = "It's a draw!";
+        statusText.textContent = "It's a draw! 🤝";
         isGameActive = false;
     } else {
         switchPlayer();
